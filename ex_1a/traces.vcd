@@ -1,0 +1,65 @@
+$date
+     May 01, 2014       00:04:08
+$end
+
+$version
+              SystemC 2.3.0-ASI --- Feb 11 2013 12:54:17
+$end
+
+$timescale
+     1 us
+$end
+
+$scope module SystemC $end
+$var wire   16  aaa  data_amount [15:0]  $end
+$var wire    1  aab  disc_packet       $end
+$var wire   32  aac  counter [31:0]  $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+b0 aaa
+0aab
+b0 aac
+$end
+
+#3
+b1010100101 aaa
+b1010100101 aac
+
+#9
+b10110110110 aaa
+1aab
+b111110001 aac
+
+#32
+b1100111 aaa
+0aab
+b1100111 aac
+
+#58
+b10001010010 aaa
+b10001010010 aac
+
+#89
+b10110111001 aaa
+1aab
+b10110000 aac
+
+#117
+b1110100 aaa
+0aab
+b1110100 aac
+
+#144
+b100010011 aaa
+b100010011 aac
+
+#176
+b11110001 aaa
+b11110001 aac
+

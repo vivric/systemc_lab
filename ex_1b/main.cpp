@@ -1,0 +1,49 @@
+#include "stimul.h"
+#include "counter.h"
+#include "bcd_decoder.h"
+
+int sc_main(int argc, char *argv[]){
+
+  sc_signal<bool> clock, reset;
+  sc_signal<unsigned short int> count_val;
+  sc_signal<char> v_hi, v_lo;
+
+  sc_set_time_resolution(1, SC_US);
+
+  stimul stim("stimuli_mod");
+  stim.clk(clock);
+  stim.res(reset);
+
+  counter count("counter");
+  count.clk(clock);
+  count.res(reset);
+  count.cnt(count_val);
+
+
+  bcd_decoder bcd("bcd_decode");
+  bcd.val(count_val);
+  bcd.hi(v_hi);
+  bcd.lo(v_lo);
+
+  sc_trace_file *tf = sc_create_vcd_trace_file("traces");  
+  sc_trace(tf, reset, "reset");
+  sc_trace(tf, clock, "clock");
+  sc_trace(tf, count_val, "counter_value");
+  sc_trace(tf, v_hi, "BCD_High");
+  sc_trace(tf, v_lo, "BCD_low");
+
+  int n_cycles;
+  if(argc != 2){
+    cout << "default n_cycles = 200\n";
+    n_cycles = 200;
+  }
+  else
+    n_cycles = atoi(argv[1]);
+
+  sc_start(n_cycles, SC_US);
+
+  sc_close_vcd_trace_file(tf);
+
+  return 0;
+
+}
